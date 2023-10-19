@@ -14,8 +14,10 @@ import java.util.Map;
 
 public class OkConfigAPI {
     private final Map<String, OkConfig> configMap = new HashMap<>();
+    private final Plugin plugin;
+    OkConfigAPI(Plugin plugin) {this.plugin = plugin;}
 
-    public void load(Plugin plugin, @NotNull String... configs) {
+    public void load(@NotNull String... configs) {
         for (String config : configs) {
             plugin.saveResource(config,false);
 
