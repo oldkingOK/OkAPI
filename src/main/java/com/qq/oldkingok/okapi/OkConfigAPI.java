@@ -19,8 +19,8 @@ public class OkConfigAPI {
         for (String config : configs) {
             plugin.saveResource(config,false);
 
-            var dataFile = new File(plugin.getDataFolder(), "data.yml");
-            var dataConfig = YamlConfiguration.loadConfiguration(dataFile);
+            File dataFile = new File(plugin.getDataFolder(), "data.yml");
+            FileConfiguration dataConfig = YamlConfiguration.loadConfiguration(dataFile);
 
             configMap.put(config, new OkConfig(dataConfig, dataFile));
         }
@@ -31,14 +31,14 @@ public class OkConfigAPI {
     }
 
     private OkConfig getOkConfig(String configStr){
-        var config = configMap.get(configStr);
+        OkConfig config = configMap.get(configStr);
         if (config == null) throw new IllegalArgumentException("Could not find configuration: " + configStr);
         return config;
     }
 
     public String getStr(String configStr, String node){
-        var config = getConfig(configStr);
-        var str = config.getString(configStr);
+        FileConfiguration config = getConfig(configStr);
+        String str = config.getString(configStr);
         if (str == null) throw new IllegalArgumentException(
                 "Could not find node: "+node+" in config: " + configStr);
         return str.replace('&', ChatColor.COLOR_CHAR);
@@ -46,7 +46,7 @@ public class OkConfigAPI {
     }
 
     public void edit(String configStr, ConfigRunnable runnable) {
-        var config = getOkConfig(configStr);
+        OkConfig config = getOkConfig(configStr);
         runnable.run(config.dataConfig);
         config.save();
     }

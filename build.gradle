@@ -2,6 +2,7 @@ plugins {
     id 'java'
     id 'maven-publish'
     id 'com.github.johnrengelman.shadow' version '7.1.2'
+    id 'io.freefair.lombok' version '8.0.1'
 }
 
 group = 'com.qq.oldkingok'
@@ -21,27 +22,23 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.projectlombok:lombok:1.18.28'
     implementation 'org.jetbrains:annotations:24.0.0'
-    annotationProcessor 'org.projectlombok:lombok:1.18.28'
     compileOnly "org.spigotmc:spigot-api:1.20-R0.1-SNAPSHOT"
 }
 
-def targetJavaVersion = 17
 java {
-    def javaVersion = JavaVersion.toVersion(targetJavaVersion)
-    sourceCompatibility = javaVersion
-    targetCompatibility = javaVersion
-    if (JavaVersion.current() < javaVersion) {
-        toolchain.languageVersion = JavaLanguageVersion.of(targetJavaVersion)
-    }
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
 }
 
+/*
 tasks.withType(JavaCompile).configureEach {
     if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
         options.release = targetJavaVersion
     }
 }
+
+ */
 
 shadowJar {
     archiveClassifier.set('')
