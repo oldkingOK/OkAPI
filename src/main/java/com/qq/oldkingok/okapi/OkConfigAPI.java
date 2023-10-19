@@ -21,7 +21,7 @@ public class OkConfigAPI {
         for (String config : configs) {
             plugin.saveResource(config,false);
 
-            File dataFile = new File(plugin.getDataFolder(), "data.yml");
+            File dataFile = new File(plugin.getDataFolder(), config);
             FileConfiguration dataConfig = YamlConfiguration.loadConfiguration(dataFile);
 
             configMap.put(config, new OkConfig(dataConfig, dataFile));
