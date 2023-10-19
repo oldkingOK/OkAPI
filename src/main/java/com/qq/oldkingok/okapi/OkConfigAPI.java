@@ -24,38 +24,21 @@ public class OkConfigAPI {
             File dataFile = new File(plugin.getDataFolder(), config);
             FileConfiguration dataConfig = YamlConfiguration.loadConfiguration(dataFile);
 
-            configMap.put(config, new OkConfig(dataConfig, dataFile));
+            configMap.put(config, new OkConfig(config, dataConfig, dataFile));
         }
     }
 
-    public FileConfiguration getConfig(String configStr){
-        return getOkConfig(configStr).dataConfig;
-    }
-
-    private OkConfig getOkConfig(String configStr){
+    public OkConfig getOkConfig(String configStr){
         OkConfig config = configMap.get(configStr);
         if (config == null) throw new IllegalArgumentException("Could not find configuration: " + configStr);
         return config;
     }
 
-    public String getStr(String configStr, String node){
-        FileConfiguration config = getConfig(configStr);
-        String str = config.getString(node);
-        if (str == null) throw new IllegalArgumentException(
-                "Could not find node: "+node+" in config: " + configStr);
-        return str.replace('&', ChatColor.COLOR_CHAR);
-
-    }
-
-    public void edit(String configStr, ConfigRunnable runnable) {
-        OkConfig config = getOkConfig(configStr);
-        runnable.run(config.dataConfig);
-        config.save();
-    }
 
     @Builder
     static
     class OkConfig{
+        String name;
         FileConfiguration dataConfig;
         File dataFile;
 
@@ -65,6 +48,22 @@ public class OkConfigAPI {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+        }
+
+        public void edit(ConfigRunnable runnable) {
+            runnable.run(dataConfig);
+            save();
+        }
+
+        public String getStr(String node){
+            String str = dataConfig.getString(node);
+            if (str == null) throw new IllegalArgumentException(
+                    "Could not find node: "+node+" in config: " + name);
+            return str.replace('&', ChatColor.COLOR_CHAR);
+        }
+
+        public FileConfiguration getConfig(String configStr){
+            return dataConfig;
         }
     }
 
