@@ -40,7 +40,7 @@ public class OkConfigAPI {
 
     public String getStr(String configStr, String node){
         FileConfiguration config = getConfig(configStr);
-        String str = config.getString(configStr);
+        String str = config.getString(node);
         if (str == null) throw new IllegalArgumentException(
                 "Could not find node: "+node+" in config: " + configStr);
         return str.replace('&', ChatColor.COLOR_CHAR);

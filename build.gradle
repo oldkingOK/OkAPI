@@ -31,15 +31,6 @@ java {
     targetCompatibility = JavaVersion.VERSION_1_8
 }
 
-/*
-tasks.withType(JavaCompile).configureEach {
-    if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
-        options.release = targetJavaVersion
-    }
-}
-
- */
-
 shadowJar {
     archiveClassifier.set('')
     archiveVersion.set('')
