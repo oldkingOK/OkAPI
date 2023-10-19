@@ -1,11 +1,11 @@
 package com.qq.oldkingok.okapi;
 
 public class OkFormat {
-    String str;
-    OkFormat(String str) {
+    private String str;
+    public OkFormat(String str) {
         this.str = str;
     }
-    OkFormat format(Object from, Object to) {
+    public OkFormat format(Object from, Object to) {
         str = str.replaceAll(from.toString(), to.toString());
         return this;
     }
