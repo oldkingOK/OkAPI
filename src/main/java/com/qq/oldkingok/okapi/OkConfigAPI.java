@@ -36,8 +36,7 @@ public class OkConfigAPI {
 
 
     @Builder
-    static
-    class OkConfig{
+    static public class OkConfig{
         String name;
         FileConfiguration dataConfig;
         File dataFile;
