@@ -54,6 +54,11 @@ public class OkConfigAPI {
             save();
         }
 
+        /**
+         * 获取String，自动替换&为颜色符号
+         * @param node
+         * @return
+         */
         public String getStr(String node){
             String str = dataConfig.getString(node);
             if (str == null) throw new IllegalArgumentException(
