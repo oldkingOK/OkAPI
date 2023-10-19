@@ -66,7 +66,7 @@ public class OkConfigAPI {
             return str.replace('&', ChatColor.COLOR_CHAR);
         }
 
-        public FileConfiguration getConfig(String configStr){
+        public FileConfiguration getConfig(){
             return dataConfig;
         }
     }
