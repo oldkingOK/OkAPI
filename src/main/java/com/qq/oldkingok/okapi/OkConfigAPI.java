@@ -10,6 +10,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 public class OkConfigAPI {
@@ -64,6 +65,14 @@ public class OkConfigAPI {
             if (str == null) throw new IllegalArgumentException(
                     "Could not find node: "+node+" in config: " + name);
             return str.replace('&', ChatColor.COLOR_CHAR);
+        }
+
+        public List<String> getStrList(String node){
+            List<String> strs = dataConfig.getStringList(node);
+            for (int i = 0; i < strs.size(); i++) {
+                strs.set(i, strs.get(i).replace('&', ChatColor.COLOR_CHAR));
+            }
+            return strs;
         }
 
         public FileConfiguration getConfig(){
