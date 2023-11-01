@@ -6,7 +6,12 @@ public class OkFormat {
         this.str = str;
     }
     public OkFormat format(Object from, Object to) {
-        str = str.replaceAll(from.toString(), to.toString());
+        if (from == null) throw new IllegalArgumentException("Object from can't be null!");
+        if (to == null) {
+            str = str.replaceAll(from.toString(), "Unknown");
+        } else {
+            str = str.replaceAll(from.toString(), to.toString());
+        }
         return this;
     }
 
