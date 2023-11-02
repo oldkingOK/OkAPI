@@ -2,3 +2,6 @@ name: OkAPI
 version: '${version}'
 main: com.qq.oldkingok.okapi.OkAPI
 api-version: '1.20'
+commands:
+  oktest:
+    description: 'test'
